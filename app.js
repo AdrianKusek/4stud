@@ -8,6 +8,7 @@ const User = require("./models/user");
 const usersRouts = require("./routes/users");
 const addsRouts = require("./routes/add");
 const chatRouts = require("./routes/messages");
+const PORT = process.env.PORT || 3000;
 
 const AppError = require("./AppError");
 ////FLASH
@@ -108,4 +109,4 @@ app.use("/chat", chatRouts);
 
 ///END OF ROUTES
 
-app.listen(3000, () => console.log("serving on 3000"));
+app.listen(PORT, () => console.log("serving "));
