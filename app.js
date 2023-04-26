@@ -108,4 +108,4 @@ app.use("/chat", chatRouts);
 
 ///END OF ROUTES
 
-app.listen(27017, () => console.log("serving on 3000"));
+app.listen(3000, () => console.log("serving on 3000"));
