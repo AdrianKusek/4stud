@@ -1,0 +1,308 @@
+<% layout('layout/boilerplate') %>
+    <div class="alert-container hide">
+        <div class="alert">
+            <h2>Please fill all fields</h2>
+            <div class="alert-close">&#10006;</div>
+        </div>
+
+    </div>
+
+    <div class="form-container">
+        <div class="blur">
+            <div class="form-outer">
+                <div class="progress-bar-container">
+                    <p class="form-step-label">STEP 1</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar__progress _20"></div>
+                        <div class="progress-bar__progress _40 hide"></div>
+                        <div class="progress-bar__progress _60 hide"></div>
+                        <div class="progress-bar__progress _80 hide"></div>
+                        <div class="progress-bar__progress _100 hide"></div>
+                    </div>
+                </div>
+
+                <div class="form-inner">
+                    <!-- <h3>Create new ad</h3> -->
+
+                    <form class="" action="/adds/new" method="POST" enctype="multipart/form-data">
+                        <div class="form-step step-0">
+                            <div class="form-field">
+                                <label for="title">
+                                    <h2>Title</h2>
+                                </label>
+                                <input type="text" id="title" name="add[title]" required autofocus>
+
+                            </div>
+
+                            <div class="form-field">
+                                <label for="description">
+                                    <h2>Description</h2>
+                                </label>
+                                <textarea type="text" id="description" name="add[description]" required></textarea>
+
+                            </div>
+
+                            <div class="form-navigation">
+                                <div class="form-navigation__next form-navigation-btn">Next &raquo;</div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="step-1 form-step hide">
+                            <div class="form-field">
+                                <h2>Address</h2>
+                                <p>Your address wont be shown to other users</p>
+                                <input class="input mb12" name="add[address]" autocomplete="address-line1"
+                                    placeholder="Address" required>
+                                <div class="flex">
+                                    <input class="input mb12" name="add[city]" autocomplete="address-level2"
+                                        placeholder="City" required>
+                                    <input class="input mb12 ml6" name="add[postcode]" autocomplete="postal-code"
+                                        placeholder="ZIP / Postcode" required>
+                                </div>
+
+                            </div>
+
+                            <div class="form-navigation">
+                                <div class="form-navigation__previous  form-navigation-btn">&laquo; Previous</div>
+                                <div class="form-navigation__next  form-navigation-btn">Next &raquo;</div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="step-2 form-step hide">
+                            <div class="mb-3">
+                                <label for="formFile" class="mb-sm">
+                                    <h2>Choose one or more pictures</h2>
+                                </label>
+                                <input class="form-control" type="file" id="formFile" name="image" multiple required>
+                            </div>
+                            <div class="form-navigation">
+                                <div class="form-navigation__previous  form-navigation-btn">&laquo; Previous</div>
+                                <div class="form-navigation__next  form-navigation-btn">Next &raquo;</div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="step-3 form-step hide">
+                            <h2>Choose a breed or search all breeds</h2>
+                            <input type="search" id="search" placeholder="Search">
+
+
+                            <% for(let dogBreed of dogBreeds){ %>
+                                <div class="inputs">
+                                    <div class="breed-input radio-wrap"><input class="radio-input" type="radio" required
+                                            name="add[breed]" id="<%= dogBreed %> " value="<%= dogBreed %>"><label
+                                            for="<%= dogBreed %>">
+                                            <%= dogBreed %>
+                                        </label></div>
+                                </div>
+
+                                <% } %>
+                                    <div class="form-navigation">
+                                        <div class="form-navigation__previous  form-navigation-btn">&laquo; Previous
+                                        </div>
+                                        <div class="form-navigation__next  form-navigation-btn">Next &raquo;</div>
+
+                                    </div>
+
+
+                        </div>
+                        <div class="step-4 form-step hide">
+                            <h2>Gender:</h2>
+                            <div class="radio-wrap"><input required class="radio-input" type="radio" name="add[gender]"
+                                    id="boy" value="boy"><label for="boy">
+                                    Boy
+                                </label></div>
+                            <div class="radio-wrap"><input required class="radio-input" type="radio" name="add[gender]"
+                                    id="girl" value="girl"><label for="girl">
+                                    Girl
+                                </label></div>
+                            <!-- <input type="radio" name="add[gender]" value="boy" id="boy"><label for="boy">Boy</label>
+                            <input type="radio" name="add[gender]" value="girl" id="girl"><label for="girl">Girl</label> -->
+                            <h2>Age:</h2>
+                            <div>
+                                <input required type="number" min="1" max="15" id="number" name="add[age]">
+                            </div>
+
+                            <div class="form-navigation">
+                                <div class="form-navigation__previous  form-navigation-btn">&laquo; Previous</div>
+                                <button class="form-navigation-btn form-navigation-btn__submit">SUBMIT</button>
+
+                            </div>
+
+
+
+
+                        </div>
+
+                        <div class="form-step step-3 hide">
+
+
+
+
+
+
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="/js/searchInput.js"></script>
+    <script>
+
+
+        const next = document.querySelectorAll('.form-navigation__next');
+        const previous = document.querySelectorAll('.form-navigation__previous');
+        const alert = document.querySelector('.alert-container');
+        const alertClose = document.querySelector('.alert-close');
+        const stepLabel = document.querySelector('.form-step-label');
+        const progress40 = document.querySelector('._40');
+        const progress60 = document.querySelector('._60');
+        const progress80 = document.querySelector('._80');
+        const progress100 = document.querySelector('._100');
+        const progress = [progress40, progress60, progress80, progress100];
+
+
+
+
+
+        alertClose.addEventListener('click', function () {
+            alert.classList.toggle('hide');
+        })
+
+        next.forEach((e, i) => {
+            const nextStep = document.querySelector(`.step-${i + 1}`)
+            const currentStep = document.querySelector(`.step-${i}`)
+            const req = currentStep.querySelectorAll('[required]');
+
+
+            req.forEach((e) => {
+
+
+
+
+
+                if (e.type === 'file') {
+
+                    e.addEventListener('change', () => {
+
+                        next[i].classList.add('form-navigation-btn__success');
+                    });
+                }
+                if (e.name === 'add[address]' || e.name === 'add[breed]') {
+                    e.addEventListener('change', () => {
+                        console.log('changing')
+                        next[i].classList.add('form-navigation-btn__success');
+
+                    })
+                }
+
+                e.addEventListener('keyup', () => {
+                    const values = []
+
+                    req.forEach(e => {
+
+                        values.push(e.value);
+                        // console.log(e.name);
+
+
+                    })
+
+                    const filteredValues = values.filter(e => e === '');
+                    if (!filteredValues.length) {
+
+                        next[i].classList.add('form-navigation-btn__success');
+                    }
+                    else if (filteredValues.length) {
+                        next[i].classList.remove('form-navigation-btn__success');
+                    }
+
+                });
+            })
+
+
+
+
+
+
+            e.addEventListener('click', function () {
+                // const req = currentStep.querySelectorAll('[required]');
+                let allFieldsFilled = []
+
+                req.forEach(e => {
+                    allFieldsFilled.push(e.validity.valid)
+
+                });
+                console.log(req, 'here');
+                let notFilled = allFieldsFilled.filter(e => e === false);
+
+                if (notFilled.length) {
+                    alert.classList.toggle('hide');
+                }
+                else {
+                    nextStep.classList.toggle('hide')
+                    currentStep.classList.toggle('hide');
+                    stepLabel.textContent = `STEP ${i + 2}`;
+                    progress.forEach((prog, index) => {
+                        console.log(i, index, progress)
+                        if (index === i) {
+                            progress[index].classList.remove('hide');
+                        }
+                    })
+
+
+
+                }
+
+
+
+                // if (allFieldsFilled === true){
+                //     nextStep.classList.toggle('hide')
+                //     currentStep.classList.toggle('hide');
+
+                // } 
+
+
+
+            })
+        })
+        previous.forEach((e, i) => {
+            const previousStep = document.querySelector(`.step-${i}`)
+            const currentStep = document.querySelector(`.step-${i + 1}`)
+            e.addEventListener('click', function () {
+                previousStep.classList.toggle('hide')
+                currentStep.classList.toggle('hide');
+                stepLabel.textContent = `STEP ${i + 1}`;
+                // progress.forEach((prog, index) => {
+                //     console.log(i, index, progress[i])
+                //     if (index === i) {
+                //         progress[index].classList.toggle('hide');
+                //     }
+                // })
+
+
+
+            })
+        })
+
+
+    </script>

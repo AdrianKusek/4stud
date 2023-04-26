@@ -1,0 +1,242 @@
+<% layout('layout/boilerplate') %>
+
+
+
+    <div class="chat-container">
+        <% if(!activeChannel){%>
+            <div class="chat-container__left">
+                <h1 class="chat__noselection">Select or create a conversation first with another user</h1>
+                <% for(let channel of user.chatChannels) {%>
+
+                    <a href="/chat/<%=channel.id%>">
+                        <div <% if(channel.id===activeChannel) {%> class = 'chat-channel chat-channel__active'
+                            <%} else{%> class= 'chat-channel' <% } %> >
+                                    <div class="chat-channel__user-circle">
+                                        <% if(channel.user1===user.username) { %>
+
+                                            <div class="chat-channel__letter">
+                                                <%= channel.user2[0] %>
+                                            </div>
+
+                                            <% } else{ %>
+                                                <div class="chat-channel__letter">
+                                                    <%= channel.user1[0] %>
+                                                </div>
+                                                <% } %>
+
+                                    </div>
+
+                                    <div class="chat-channel__info">
+
+                                        <% if(channel.user1===user.username) { %>
+
+                                            <p class="chat-channel__username">
+                                                <%= channel.user2 %>
+                                            </p>
+
+                                            <% } else{ %>
+                                                <p class="chat-channel__username">
+                                                    <%= channel.user1 %>
+                                                </p>
+                                                <% } %>
+
+                                                    <div class="chat-channel__msg-short">
+                                                        <% if(channel.messages.length) {%>
+                                                            <%= channel.messages[channel.messages.length- 1].body%>
+
+                                                                <% } %>
+                                                    </div>
+                                    </div>
+                                    <div class="chat-channel__date">
+                                        <% if(channel.messages.length) {%>
+                                            <p class="date">
+                                                <%= channel.messages[channel.messages.length- 1].date%>
+                                            </p>
+                                            <% } %>
+                                    </div>
+                        </div>
+                    </a>
+
+
+                    <% } %>
+            </div>
+
+
+
+            <% } %>
+                <% if(activeChannel){%>
+                    <div class="chat-container__right">
+
+                        <div class="chat-body__container">
+                            <div class="chat-close"><a title="CLOSE CHAT" href="/chat">x</a></div>
+
+                            <% for(let channel of user.chatChannels) {%>
+
+                                <% if(channel.id===activeChannel) { %>
+
+                                    <% const messages=channel.messages.slice().reverse() %>
+                                        <% let counter=0 %>
+                                            <% for (let container of channel.consecutiveMsg) { %>
+
+                                                <div <% if(container[1]===user.username) {%> class =
+                                                    'chat-test
+                                                    chat-testy-from_user'
+                                                    <%} else { %> class = 'chat-test' <% } %> >
+                                                            <div class="mini-circle">
+                                                                <%=container[1][0] %>
+                                                            </div>
+                                                            <div class="chat-test-messages">
+                                                                <% messages.slice(counter,container[0] +
+                                                                    counter).forEach(function(el){%>
+                                                                    <div <% if(el.sender===user.username) {%> class =
+                                                                        'chat-body
+                                                                        from-user'
+                                                                        <%} else { %> class = 'chat-body' <% } %> >
+                                                                                <div class="chat-body__message">
+                                                                                    <%= el.body %>
+
+
+                                                                                </div>
+
+                                                                                <div class="chat-body__date">
+                                                                                    <p class="date">
+                                                                                        <%= el.date %>
+                                                                                    </p>
+                                                                                </div>
+
+                                                                    </div>
+                                                                    <% }) %>
+                                                            </div>
+
+                                                </div>
+                                                <% counter+=container[0] %>
+                                                    <% } %>
+
+
+                                                        <!-- <% for (let message of channel.messages.slice().reverse()) { %>
+
+                                                    <div <% if(message.sender===user.username) {%> class =
+                                                        'chat-body
+                                                        from-me'
+                                                        <%} else { %> class = 'chat-body' <% } %> >
+                                                                <div class="chujs">
+                                                                    <%= message.body %>
+
+
+                                                                </div>
+
+                                                                <div class="chat-body__date">
+                                                                    <p class="date">
+                                                                        <%= message.date %>
+                                                                    </p>
+                                                                </div>
+
+                                                    </div>
+
+                                                    <% } %> -->
+
+                                                        <% } %>
+
+
+
+
+
+
+                                                            <% } %>
+                        </div>
+                        <form class="chat-form" action="/chat/<%=activeChannel %>" method="POST">
+
+
+
+                            <input class="chat-form__msg" type="text" id="description" name="message[body]" required>
+
+
+
+
+                            <button class="chat-form__btn">Send</button>
+                        </form>
+
+
+
+                    </div>
+                    <% }%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        const dates = document.querySelectorAll('.date');
+        // console.log(dates);
+        var now = new Date().getTime();
+        console.log(now, 'nooow');
+
+        for (let date of dates) {
+            const msgDate = new Date(date.outerText).getTime();
+
+            // console.log(new Date(date.outerText).getTime());
+            date.outerText = getDate(now, msgDate);
+
+
+        }
+
+        function getDate(currentDate, messageDate) {
+            let date = new Date(messageDate);
+            let formatedDate = date.getUTCHours();
+
+            if (currentDate - messageDate < 86400000) {
+                formatedDate = `${date.getUTCHours()}:${formatSingleDigit(date.getUTCMinutes())}`
+                console.log(formatedDate, 'form');
+                console.log(date.getUTCHours(), 'just date');
+                return formatedDate;
+
+
+            }
+            else {
+                formatedDate = `${formatSingleDigit(date.getDate())}/${formatSingleDigit(date.getMonth() + 1)}/${formatSingleDigit(date.getFullYear())}`
+                return formatedDate;
+
+            }
+        }
+        function formatSingleDigit(digit) {
+            // console.log(digit.toString())
+            if (digit.toString().length < 2) {
+
+                return `0${digit}`
+            }
+            else if (digit.toString().length === 4) {
+                return digit.toString().slice(2)
+            }
+            else {
+                return digit
+            }
+        }
+    </script>
+    //
+    <script>
+    //     const closeButton = document.querySelector('.chat-close');
+    //     const chatContainerRight = document.querySelector('.chat-container__right')
+    //     const chatContainerLeft = document.querySelector('.chat-container__left')
+
+
+    //     closeButton.addEventListener('click', function () {
+    //         console.log('hejjjj');
+    //         // chatContainerRight.classList.toggle('hide');
+    //         chatContainerLeft.classList.toggle('hide');
+    //     })
+    //     if (window.innerWidth <= 660) {
+    //         chatContainerLeft.classList.toggle('hide');
+    //     }
+
+    // </script>

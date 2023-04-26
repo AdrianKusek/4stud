@@ -1,0 +1,107 @@
+<!-- <div class="pregrid">
+    <div class="grid">
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+        <div class="grid-gap"></div>
+        <div class="grid-item"></div>
+    </div>
+
+</div> -->
+
+
+<div class="navbar-container">
+    <div class="navbar">
+        <a href="/">
+            <div class="logo-container">
+                <div class="logo-img"></div>
+                <div class="logo-text">4Stud</div>
+            </div>
+        </a>
+        <div class="buttons">
+            <a href="/adds/new" class="btn btn-create">
+                <div class="btn-text">+Create Ad</div>
+            </a>
+            <a title="CREATE AD" href="/adds/new" class="btn btn-create__mobile">
+                <div class="btn-plus">+</div>
+            </a>
+
+            <div class="hamburger ">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+            <!-- <i class="fa-solid fa-comment user-icon"></i>
+            <i class="fa-regular fa-user user-icon"></i> -->
+
+
+
+        </div>
+
+    </div>
+</div>
+<div class="menu slide-left hide">
+    <div class="  menu-close">
+        <i class="fa-sharp fa-solid fa-xmark"></i>
+    </div>
+    <div class="menu-items">
+
+        <a href="/adds/search" class='menu-item'>
+            <div class="menu-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="menu-text">Search</div>
+        </a>
+        <a href="/chat" class="menu-item">
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <i class="fa-regular fa-message"></i>
+                </div>
+                <div class="menu-text">Messages</div>
+            </div>
+        </a>
+
+        <% if(!currentUser){ %>
+            <a href="/login" class="menu-item">
+                <div class="menu-icon">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div class="menu-text">Login</div>
+            </a>
+            <!-- <a href="/register">Register</a> -->
+            <% } else { %>
+                <a href="/logout" class="menu-item">
+                    <div class="menu-icon">
+                        <i class="fa-regular fa-user "></i>
+                    </div>
+                    <div class="menu-text">Logout</div>
+                </a>
+
+                <% } %>
+
+                    <!-- <a href="/login" class="menu-item">
+                        <div class="menu-icon">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <div class="menu-text">Login</div>
+                    </a> -->
+    </div>
+</div>

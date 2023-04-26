@@ -1,0 +1,24 @@
+<% layout('layout/boilerplate') %>
+
+    <h1>Yooo</h1>
+    <a href="/adds/new">Create new add</a>
+    <div>
+        <ul>
+            <% for(let add of adds){ %>
+                <a href="/adds/<%= add._id %>">
+                    <%= add.title %>
+                </a>
+                <li>
+                    <%= add.description %>
+                </li>
+                <li>
+                    <a href="/user/<%= add.author._id %>">
+                        By <%= add.author.username %>
+                    </a>
+
+                </li>
+
+
+                <% } %>
+        </ul>
+    </div>

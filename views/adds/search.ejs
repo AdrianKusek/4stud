@@ -1,0 +1,422 @@
+<% layout('layout/boilerplate') %>
+    <form action=""></form>
+    <div class="all-ads-container">
+        <div class="all-ads-container__left   ">
+            <h2 class="search_p__desktop">Search:</h2>
+            <a href="/adds/search" class="search-clear">Clear</a>
+
+            <div class="search-mobile">
+                <div class="search-mobile__back">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <h2 class="search-mobile__head">Search</h2>
+                <a href="/adds/search" class="search-mobile__clear">Clear</a>
+            </div>
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- Autocomplete location search input -->
+                            <div class="form-group">
+                                <label>
+                                    <h3>Location:</h3>
+                                </label>
+                                <div class="custom-search">
+                                    <i class="fa-solid fa-location-pin location-icon color-gray"></i>
+
+                                    <input type="text" class="form-control search-input__all" id="search_input"
+                                        placeholder="Type city..." />
+
+                                </div>
+
+                                <a href="#" class="city link "><input class="hide" id="city" type="checkbox"
+                                        value="<%= city %>" name="city"><label class="city-label" for="city">
+
+                                    </label></a>
+
+                                <% if (city) { %>
+                                    <div class="inputs">
+
+                                        <div class="distance-input"><a class="link" href="#"><input type="checkbox"
+                                                    name="radius" id="rad10 " value="10"><label for="rad10">
+                                                    Within 10 miles
+                                                </label></a></div>
+                                    </div>
+                                    <div class="inputs">
+
+                                        <div class="distance-input"><a class="link" href="#"><input type="checkbox"
+                                                    name="radius" id="rad30 " value="30"><label for="rad30">
+                                                    Within 30 miles
+                                                </label></a></div>
+                                    </div>
+                                    <div class="inputs">
+
+                                        <div class="distance-input"><a class="link" href="#"><input type="checkbox"
+                                                    name="radius" id="rad50 " value="50"><label for="rad50">
+                                                    Within 50 miles
+                                                </label></a></div>
+                                    </div>
+                                    <div class="inputs">
+
+                                        <div class="distance-input"><a class="link" href="#"><input type="checkbox"
+                                                    name="radius" id="rad100 " value="100"><label for="rad100">
+                                                    Within 100 miles
+                                                </label></a></div>
+                                    </div>
+                                    <div class="inputs">
+
+                                        <div class="distance-input"><a class="link" href="#"><input type="checkbox"
+                                                    name="radius" id="rad200 " value="200"><label for="rad200">
+                                                    Within 200 miles
+                                                </label></a></div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="inputs">
+
+                    <h3>Age:</h3>
+                    <div class="gender-input "><a class="link " href="#"><input type="checkbox" name="age"
+                                id="lessThan2 " value="1"><label for="lessThan2">
+                                0 to 2 years
+
+                            </label></a></div>
+                </div>
+                <div class="inputs">
+
+                    <div class="gender-input"><a class="link" href="#"><input class="theme" type="checkbox" name="age"
+                                id="between2-4 " value="2"><label for="between2-4">
+                                3 to 5 years
+                            </label></a></div>
+                </div>
+                <div class="inputs">
+
+                    <div class="gender-input"><a class="link" href="#"><input type="checkbox" name="age" id="5plus"
+                                value="3"><label for="5plus">
+                                6+ years
+                            </label></a></div>
+                </div>
+
+
+
+
+                <h3>Choose a breed</h3>
+                <div class="custom-search">
+                    <i class="fa-solid fa-dog"></i>
+                    <input type="search" id="search" class="search-input__all" placeholder="Search breed...">
+
+
+                </div>
+
+                <div class="inputs">
+                    <% for(let dogBreed of dogBreeds){ %>
+
+
+                        <a class="link breed-input" href="#"><input type="checkbox" name="breed" id="<%=dogBreed%>"
+                                value="<%=dogBreed%>"><label for="<%= dogBreed %>">
+                                <%= dogBreed %>
+                            </label></a>
+
+                        <% } %>
+                </div>
+                <h3>Gender:</h3>
+
+                <div class="inputs">
+
+                    <div class="gender-input"><a class="link" href="#"><input type="checkbox" name="gender" id="boy "
+                                value="boy"><label for="boy">
+                                Boy
+                            </label></a></div>
+                </div>
+                <div class="inputs">
+
+                    <div class="gender-input"><a class="link" href="#"><input type="checkbox" name="gender" id="girl "
+                                value="girl"><label for="girl">
+                                Girl
+                            </label></a></div>
+                </div>
+
+
+
+            </div>
+
+            <div class="showResults">
+                <h3>
+                    <%= add.length%> advertisments found.
+                </h3>
+            </div>
+
+
+
+
+        </div>
+        <div class="all-ads-container__right">
+
+
+
+            <% if(add.length) { if(city){ %>
+                <div class="ads-info">
+                    <h1>Showing doggies in <%= city[0] %>.
+
+                    </h1>
+                    <h4>
+                        <%= add.length%> advertisments found.
+                    </h4>
+                </div>
+
+                <% } else { %>
+                    <div class="ads-info">
+                        <h1>Showing doggies in United Kingdom.
+
+                        </h1>
+                        <h4>
+                            <%= add.length%> advertisments found.
+                        </h4>
+                    </div>
+                    <div class="search-filter">
+                        <i class="fa-solid fa-filter search-filter__icon"></i>
+                        <h3 search-filter__text>Filter</h3>
+                    </div>
+                    <% } for(let ad of add) { %>
+
+
+
+
+                        <div class="ad-mini">
+                            <a href="/adds/<%= ad._id %>/" class="ad-mini__picture-container">
+                                <% if(ad.images.length) { %>
+                                    <div class="ad-mini__picture-container__background">
+                                        <img class="ad-mini__picture-container__picture" src="<%=ad.images[0].url%>"
+                                            alt="dog">
+
+                                    </div>
+
+                                    <% } %>
+
+
+
+                            </a>
+                            <div class="ad-mini__content-container">
+                                <a href="/adds/<%= ad._id %>/">
+                                    <h3>
+                                        <%= ad.title %>
+                                    </h3>
+                                </a>
+                                <div class="ad-mini__details">
+                                    <p>
+                                        <%= ad.breed %>
+                                    </p>
+                                    <p> &bull; Age: <%= ad.age %>
+                                    </p>&bull;
+                                    <p>
+                                        Gender: <%= ad.gender %>
+                                    </p>
+                                </div>
+                                <div class="ad-mini__description">
+                                    <p>
+                                        <%= ad.description %>
+
+                                    </p>
+                                </div>
+                                <div class="ad-mini__user-details">
+                                    <div class="ad-mini__user-content">
+                                        <div class="user-circle mini">
+                                            <i class="fa-regular fa-user "></i>
+                                        </div>
+                                        <div>
+                                            <%= ad.author.username %>
+                                                <div class="location">
+                                                    <i class="fa-solid fa-location-pin location-icon color-gray"></i>
+                                                    <p class="color-gray">
+                                                        <%= ad.city %>
+                                                    </p>
+                                                </div>
+
+
+                                        </div>
+                                        <% if(user){ %>
+                                            <% if( ad.likes.find(e=>e.toString()===user._id.toString()) ) { %>
+                                                <form class="heart-container-sm" action="/adds/<%= ad._id %>/unlike "
+                                                    method="POST">
+                                                    <button class="heart-container  ">
+                                                        <i class="fa-solid fa-heart carousel-heart ">
+
+                                                        </i>
+
+                                                    </button>
+                                                </form>
+                                                <% } else{ %>
+
+                                                    <form class="heart-container-sm" action="/adds/<%= ad._id %>/like "
+                                                        method="POST">
+                                                        <button class="heart-container ">
+                                                            <i class="fa-regular fa-heart carousel-heart"></i>
+
+
+                                                            </i>
+
+                                                        </button>
+                                                    </form>
+
+                                                    <% } %>
+
+
+
+                                                        <% } else { %>
+                                                            <form class="heart-container-sm"
+                                                                action="/adds/<%= ad._id %>/like " method="POST">
+                                                                <button class="heart-container ">
+                                                                    <i class="fa-regular fa-heart carousel-heart"></i>
+
+
+                                                                    </i>
+
+                                                                </button>
+                                                            </form>
+
+                                                            <% } %>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                        <% } } else { %>
+                            <div>
+                                <h1>NO SEARCH RESULTS</h1>
+                            </div>
+                            <% } %>
+
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+    <style>
+        .link {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <script src="/js/searchInput.js"></script>
+    <!-- <script>
+        const search = document.querySelector('#search');
+        const data = document.querySelectorAll('.breed-input')
+        search.addEventListener('input', e => {
+            const value = e.target.value.toLowerCase();
+
+            for (let i of data) {
+                console.log(value)
+                const isVisable = i.firstChild.value.toLowerCase().includes(value)
+                console.log(i)
+                i.classList.toggle('hide', !isVisable);
+
+
+            }
+
+        })
+
+
+
+    </script> -->
+    <script src="/js/addQueryToUrl.js"></script>
+    <script>
+        const backButton = document.querySelector('.search-mobile__back');
+        const showResultsButton = document.querySelector('.showResults');
+        const searchForm = document.querySelector('.all-ads-container__left');
+        const searchResults = document.querySelector('.all-ads-container__right');
+        const searchFilter = document.querySelector('.search-filter');
+        let orginalSearchState = searchForm.style.display;
+        let orginalResultState = searchResults.style.display;
+        const url = window.location.search;
+        console.log(url);
+
+        if (window.innerWidth <= 970) {
+            searchForm.style.display = 'none';
+        }
+        if (url && window.innerWidth <= 970) {
+            searchForm.style.display = 'block';
+            searchResults.style.display = 'none'
+            orginalSearchState = 'block';
+            orginalResultState = 'none';
+
+        }
+
+        window.addEventListener('resize', () => {
+
+            if (window.innerWidth > 970) {
+                searchForm.style.display = 'block';
+                searchResults.style.display = 'flex'
+
+            }
+            else if (window.innerWidth <= 970) {
+                searchForm.style.display = orginalSearchState;
+                searchResults.style.display = orginalResultState;
+
+                if (orginalSearchState === 'none') {
+                    searchForm.style.display = 'none';
+
+
+
+                }
+                else if (orginalResultState === 'none') {
+
+                    searchResults.style.display = 'none';
+
+
+
+                }
+            }
+
+            // else {
+            //     searchForm.style.display = 'none';
+            // }
+        })
+
+        function hideFilter() {
+            searchForm.style.display = 'none';
+            orginalSearchState = 'none';
+            searchResults.style.display = 'flex';
+            orginalResultState = 'flex'
+
+        }
+
+
+
+
+        backButton.addEventListener('click', function () {
+            hideFilter()
+
+
+
+        })
+
+        showResultsButton.addEventListener('click', function () {
+            hideFilter()
+
+        }
+        )
+        searchFilter.addEventListener('click', function () {
+
+            searchForm.style.display = 'block';
+            orginalSearchState = 'block';
+            searchResults.style.display = 'none';
+            orginalResultState = 'none'
+
+        })
+    </script>
