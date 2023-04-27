@@ -1769,6 +1769,7 @@ input:checked[type='checkbox']::before{
         justify-content: center;
        
         width: 100vw;
+        min-height: 100vh;
     }
 
     .all-ads-container__left{
@@ -1822,7 +1823,7 @@ input:checked[type='checkbox']::before{
     }
     .ad-mini{
         width: 100%;
-        height: 45vh;
+        height: 50vh;
         margin-bottom: 30px;
     }
     .search-mobile{
@@ -1932,6 +1933,7 @@ input:checked[type='checkbox']::before{
          background-repeat: no-repeat;
          margin: 2vh auto 0 auto;
          cursor: pointer;
+         margin-top: 10vh;
          /* border: 1px solid black; */
     }
     .hero-column__right{
@@ -1943,7 +1945,9 @@ input:checked[type='checkbox']::before{
         width: 100vw;
         padding: 0 var(--padding);
         height: auto;
-        /* border: 1px solid black; */
+        /* border: 5px solid black; */
+     
+        
 
       
     }
