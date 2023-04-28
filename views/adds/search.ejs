@@ -166,6 +166,11 @@
                     <h4>
                         <%= add.length%> advertisments found.
                     </h4>
+
+                </div>
+                <div class="search-filter">
+                    <i class="fa-solid fa-filter search-filter__icon"></i>
+                    <h3 search-filter__text>Filter</h3>
                 </div>
 
                 <% } else { %>
@@ -207,14 +212,17 @@
                                     </h3>
                                 </a>
                                 <div class="ad-mini__details">
-                                    <p>
-                                        <%= ad.breed %>
+                                    <p class="ad-mini__breed">
+                                        <%= ad.breed %> &bull;
                                     </p>
-                                    <p> &bull; Age: <%= ad.age %>
-                                    </p>&bull;
-                                    <p>
-                                        Gender: <%= ad.gender %>
-                                    </p>
+                                    <div class="ad-mini__age">
+                                        <p> Age: <%= ad.age %>
+                                        </p>&bull;
+                                        <p>
+                                            Gender: <%= ad.gender %>
+                                        </p>
+                                    </div>
+
                                 </div>
                                 <div class="ad-mini__description">
                                     <p>
@@ -357,6 +365,13 @@
 
         }
 
+        // showResultsButton.addEventListener('click', function () {
+        //     searchFilter.style.display = 'block'
+        // })
+        // backButton.addEventListener('click', function () {
+        //     searchFilter.style.display = 'block'
+        // })
+
         window.addEventListener('resize', () => {
 
             if (window.innerWidth > 970) {
@@ -393,6 +408,8 @@
             orginalSearchState = 'none';
             searchResults.style.display = 'flex';
             orginalResultState = 'flex'
+
+
 
         }
 
