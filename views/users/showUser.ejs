@@ -1,6 +1,51 @@
 <% layout('layout/boilerplate') %>
-    <h1>
-        <%= user.username %>
-    </h1>
-    <p>Ads by <%= user.username %> - <%= user.adds.length %>
-    </p>
+
+<h1>
+    <%= user.username %>
+</h1>
+<p>Ads by <%= user.username %> - <%= user.adds.length %>
+</p>
+
+<div class="all-ads-container">
+    <div class="all-ads-container__right">
+
+        <% if(user.adds.length) { %> 
+            <% for(let ad of user.adds) { %>
+                <div class="ad-mini">
+                    <a href="/adds/<%= ad._id %>/" class="ad-mini__picture-container">
+                        <% if(ad.images.length) { %>
+                            <div class="ad-mini__picture-container__background">
+                                <img class="ad-mini__picture-container__picture" src="<%=ad.images[0].url%>" alt="dog">
+                            </div>
+                        <% } %>
+                    </a>
+                    <div class="ad-mini__content-container">
+                        <a href="/adds/<%= ad._id %>/">
+                            <h3><%= ad.title %></h3>
+                        </a>
+                        <div class="ad-mini__details">
+                            <p class="ad-mini__breed"><%= ad.breed %> &bull;</p>
+                            <div class="ad-mini__age">
+                                <p>Age: <%= ad.age %> &bull; Gender: <%= ad.gender %></p>
+                            </div>
+                        </div>
+                        <div class="ad-mini__description">
+                            <p><%= ad.description %></p>
+                        </div>
+                        <div class="ad-mini__user-details">
+                            <div class="location">
+                                <i class="fa-solid fa-location-pin location-icon color-gray"></i>
+                                <p class="color-gray"><%= ad.city %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div>
+                <h2>No ads found for this user.</h2>
+            </div>
+        <% } %>
+
+    </div>
+</div>
