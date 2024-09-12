@@ -1,0 +1,194 @@
+<% layout('layout/boilerplate') %>
+
+
+
+    <article class="show-main">
+
+        <div class="carousel-container">
+            <div class="carousel-label"></div>
+
+            <i class="fa-solid fa-chevron-left carousel-previous carousel-navigation"></i>
+            <i class="fa-solid fa-chevron-right carousel-next carousel-navigation"></i>
+
+            <div class="carousel">
+
+                <% if(add.images.length) { for(let image of add.images){ %>
+                    <img class="carousel-img" src="<%=image.url%>" alt="dog">
+                    <% } %>
+                        <% } %>
+
+            </div>
+
+        </div>
+        <div class="user-interaction-container">
+            <!-- <a href="/chat/<%= add.author._id %>">
+                <btn class="message-button btn btn-text">Message</btn>
+            </a> -->
+            <% if(user && add.author.id !== user.id) { %>
+                <form action="/chat" method="POST">
+                    <input class="hide" checked type='radio' value='<%= add.author._id %>' name="authorID">
+                    <button class="message-button btn btn-text">Message</button>
+                </form>
+            <% } %>
+
+                    <div class="user-info">
+                        <div class="user-details">
+                            <div class="user-circle">
+                                <i class="fa-regular fa-user "></i>
+                            </div>
+                            <div class="user-i">
+
+                                <p>
+                                    <%= add.author.username %>
+                                </p>
+                                <div class="location">
+                                    <i class="fa-solid fa-location-pin location-icon"></i>
+                                    <p>
+                                        <%= add.city %>
+                                    </p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="user-ads1">
+                            <a class="user-ads" href="/user/<%= add.author._id %> "> View all adverts (<%= userAdds %>)
+                                    from
+                                    this user </a>
+                        </div>
+
+
+                    </div>
+        </div>
+
+    </article>
+    <article class="description-container">
+
+        <div class="description">
+            <div>
+                <% if(user) { %>
+                    <% if( add.likes.find(e=>e.toString()===user._id.toString()) ) { %>
+                        <form action="/adds/<%= add._id %>/unlike " method="POST">
+                            <button class="heart-container heart-position"><i class="fa-solid fa-heart carousel-heart ">
+
+                                </i>
+                                <p>Unlike</p>
+                            </button>
+                        </form>
+                        <% } else{ %>
+
+                            <form action="/adds/<%= add._id %>/like " method="POST">
+                                <button class="heart-container heart-position"><i
+                                        class="fa-regular fa-heart carousel-heart"></i>
+
+
+                                    </i>
+                                    <p>Like</p>
+                                </button>
+                            </form>
+
+                            <% }} else { %>
+                                <form action="/adds/<%= add._id %>/like " method="POST">
+                                    <button class="heart-container heart-position"><i
+                                            class="fa-regular fa-heart carousel-heart"></i>
+
+
+                                        </i>
+                                        <p>Like</p>
+                                    </button>
+                                </form>
+                                <% } %>
+                                    <!-- <i class="fa-solid fa-heart carousel-heart ">
+
+                            </i>
+                            <p>Save</p> -->
+            </div>
+            <% if(user && user.id === add.author.id){ %>
+
+                <!-- <div class="ad-edit">Edit</div> -->
+                <div class="ad-edit__form hide">
+                    <div class="ad-edit__close">Close</div>
+                    <form action="">
+                        <h3>Details:</h3>
+                        <div class="description__details">
+                            <p>Title: <span>
+                                    <input name="add[title]" type="text" value=" <%= add.title %>">
+                                </span></p>
+                            <p>Age: <span>
+                                    <%= add.age %>
+                                </span></p>
+                            <p>Gender: <span>
+                                    <%= add.gender %>
+                                </span></p>
+
+                        </div>
+                        <div class="description__breed">
+                            <p>Breed: <span>
+                                    <%= add.breed %>
+                                </span></p>
+
+                        </div>
+
+                        <h3 class="description__description">Description:</h3>
+
+                        <p>
+                            <%= add.description %>
+                        </p>
+                        <button>Edit</button>
+                    </form>
+
+
+                </div>
+                <% } %>
+
+                    <h3>Details:</h3>
+                    <div class="description__details">
+                        <p>Title: <span>
+                                <%= add.title %>
+                            </span></p>
+                        <p>Age: <span>
+                                <%= add.age %>
+                            </span></p>
+                        <p>Gender: <span>
+                                <%= add.gender %>
+                            </span></p>
+
+                    </div>
+                    <div class="description__breed">
+                        <p>Breed: <span>
+                                <%= add.breed %>
+                            </span></p>
+
+                    </div>
+
+                    <h3 class="description__description">Description:</h3>
+
+                    <p>
+                        <%= add.description %>
+                    </p>
+
+
+        </div>
+    </article>
+
+
+
+
+
+
+
+
+
+
+    <script src="/js/carousel.js"></script>
+    <script>
+        const adEdit = document.querySelector('.ad-edit');
+        const adEditForm = document.querySelector('.ad-edit__form');
+        const adEditFormClose = document.querySelector('.ad-edit__close');
+        adEdit.addEventListener('click', () => {
+            adEditForm.classList.toggle('hide');
+        })
+        adEditFormClose.addEventListener('click', () => {
+            adEditForm.classList.toggle('hide');
+        })
+    </script>
