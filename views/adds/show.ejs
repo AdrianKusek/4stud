@@ -24,13 +24,12 @@
             <!-- <a href="/chat/<%= add.author._id %>">
                 <btn class="message-button btn btn-text">Message</btn>
             </a> -->
-            <% if(add.author.id !==user.id) { %>
+            <% if(user && add.author.id !== user.id) { %>
                 <form action="/chat" method="POST">
-
                     <input class="hide" checked type='radio' value='<%= add.author._id %>' name="authorID">
                     <button class="message-button btn btn-text">Message</button>
                 </form>
-                <% } %>
+            <% } %>
 
                     <div class="user-info">
                         <div class="user-details">
