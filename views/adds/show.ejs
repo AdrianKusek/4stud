@@ -103,7 +103,8 @@
                             </i>
                             <p>Save</p> -->
             </div>
-            <% if(user.id===add.author.id){ %>
+            <% if(user && user.id === add.author.id){ %>
+
                 <!-- <div class="ad-edit">Edit</div> -->
                 <div class="ad-edit__form hide">
                     <div class="ad-edit__close">Close</div>
