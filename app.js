@@ -109,4 +109,7 @@ app.use("/chat", chatRouts);
 
 ///END OF ROUTES
 
-app.listen(PORT, () => console.log("serving "));
+// app.listen(PORT, () => console.log("serving ")); commented for vercel to work
+
+// only exporting for serverless vercel
+module.exports = app;
