@@ -1,7 +1,7 @@
 
-# Your Project Title
+# 4STUD
 
-#### Video Demo: <URL HERE>
+#### Video Demo: https://youtu.be/1wXFiax6X8I
 
 #### Description:
 This project is a full-stack web application designed to provide a seamless user experience for managing listings, chatting, and user authentication. The application is built with a combination of modern technologies, including Node.js, Express, MongoDB, and Passport.js, to handle the core functionality. Users can sign up, log in, and create ads to engage with other users in real-time chat. The app also supports dynamic views with EJS templating, giving the interface flexibility for rendering content based on user data.
